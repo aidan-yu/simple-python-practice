@@ -1,0 +1,34 @@
+
+import random
+x = random.randint(0,100)
+
+print("Guess a number from 1 to 100.\nIf you guessed within 10 of the number, the game will return 'WARM'.\nIf you "
+      "guessed 10 or more away from the number, the game will return 'Cold'.\nSubsequent guesses will return 'WARMER' "
+      "or 'COLDER' depending on if you are closer or farther. Good Luck.")
+
+guesses = [0]
+
+while True:
+    guess = int(input("\nWhat is your Guess? "))
+
+    if guess < 1 or guess > 100:
+        print('OUT OF BOUNDS')
+        continue
+
+    if guess == x:
+        print(f"Congratulations, you are correct. It took {len(guesses)} guesses.")
+        break
+
+    guesses.append(guess)
+
+    if guesses[-2]:
+        if abs(x - guess) < abs(x - guesses[-2]):
+            print('WARMER')
+        else:
+            print('COLDER')
+
+    else:
+        if abs(x - guess) <= 10:
+            print('WARM')
+        else:
+            print('COLD')
